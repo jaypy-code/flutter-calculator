@@ -2,6 +2,7 @@ import 'package:calc/components/buttons/icon.dart';
 import 'package:calc/services/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Header extends StatefulWidget {
   @override
@@ -28,6 +29,13 @@ class _HeaderState extends State<Header> {
   List<Widget> children(ThemeProvider theme) {
     List<Widget> widgets = [
       ButtonIcon(
+        icon: Icons.info_outline,
+        size: 46,
+        onPress: () => this.openMyGitHub(),
+        brightness: theme.data().brightness,
+      ),
+      Spacer(),
+      ButtonIcon(
         icon: Icons.swap_horiz,
         size: 46,
         onPress: () => theme.changePosition(),
@@ -52,5 +60,10 @@ class _HeaderState extends State<Header> {
       themeProvider.setThemeByName('blue');
     } else
       themeProvider.setThemeByName('dark');
+  }
+
+  void openMyGitHub() async {
+    String url = 'https://github.com/jaypy-code/flutter-calculator';
+    if (await canLaunch(url)) await launch(url);
   }
 }
