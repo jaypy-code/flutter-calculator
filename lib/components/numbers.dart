@@ -17,7 +17,8 @@ class NumbersColumn extends StatelessWidget {
             .map(
               (String number) => NumberButton(
                 number,
-                size: MediaQuery.of(context).size.height / (numbers.length + 1),
+                size:
+                    (MediaQuery.of(context).size.height - 34) / numbers.length,
                 onPress: (String value) => this.onPressed(value),
               ),
             )
