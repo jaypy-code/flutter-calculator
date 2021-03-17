@@ -5,11 +5,13 @@ class Pad extends StatelessWidget {
   final String entry;
   final List<History> histories;
   final Brightness brightness;
+  final bool ltr;
 
   Pad({
     this.entry,
     this.histories,
     this.brightness,
+    this.ltr = true,
   });
 
   @override
@@ -59,40 +61,43 @@ class Pad extends StatelessWidget {
     double fontSize = 28,
     Color color,
   }) {
+    List<Widget> widgets = history.sing != null
+        ? [
+            Text(
+              history.sing,
+              style: TextStyle(
+                fontSize: 24,
+                color: color,
+              ),
+            ),
+            Spacer(),
+            Text(
+              history.value,
+              style: TextStyle(
+                fontSize: fontSize,
+                color: color,
+              ),
+            ),
+          ]
+        : [
+            Text(
+              history.value,
+              style: TextStyle(
+                fontSize: fontSize,
+                color: color,
+              ),
+            ),
+          ];
+
     return Container(
       margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
       padding: EdgeInsets.symmetric(
         horizontal: 50,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: history.sing != null
-            ? [
-                Text(
-                  history.sing,
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: color,
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  history.value,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    color: color,
-                  ),
-                ),
-              ]
-            : [
-                Text(
-                  history.value,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    color: color,
-                  ),
-                ),
-              ],
+        mainAxisAlignment:
+            ltr ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: ltr ? widgets : widgets.reversed.toList(),
       ),
     );
   }

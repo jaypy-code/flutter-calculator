@@ -29,64 +29,73 @@ class _MainViewState extends State<MainView> {
         backgroundColor: theme.data().primaryColor,
         body: SafeArea(
           child: Row(
-            children: [
-              NumbersColumn(
-                onPressed: (String value) => this.pushToEntry(value),
-              ),
-              View(
-                color: theme.data().backgroundColor,
-                child: Column(
-                  children: [
-                    Header(),
-                    Pad(
-                      entry: entry,
-                      histories: histories,
-                      brightness: theme.data().brightness,
-                    ),
-                    Buttons(
-                      count: 4,
-                      children: buttons
-                          .map(
-                            (button) => ButtonText(
-                              button,
-                              onPress: () => this.pushToHistory(button),
-                              brightness: theme.data().brightness,
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    Spacer(),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          ButtonText(
-                            'C',
-                            onPress: () => this.clear(),
-                            brightness: theme.data().brightness,
-                          ),
-                          Spacer(),
-                          ButtonBackspace(
-                            brightness: theme.data().brightness,
-                            onPress: () => this.backspace(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    EqualButton(
-                      color: theme.data().primaryColor,
-                      onPressed: () => this.calculate(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: this.children(theme),
           ),
         ),
       ),
     );
+  }
+
+  List<Widget> children(ThemeProvider theme) {
+    List<Widget> widgets = [
+      NumbersColumn(
+        onPressed: (String value) => this.pushToEntry(value),
+      ),
+      View(
+        ltr: theme.isLtr(),
+        color: theme.data().backgroundColor,
+        child: Column(
+          children: [
+            Header(),
+            Pad(
+              entry: entry,
+              histories: histories,
+              brightness: theme.data().brightness,
+              ltr: theme.isLtr(),
+            ),
+            Buttons(
+              count: 4,
+              children: buttons
+                  .map(
+                    (button) => ButtonText(
+                      button,
+                      onPress: () => this.pushToHistory(button),
+                      brightness: theme.data().brightness,
+                    ),
+                  )
+                  .toList(),
+            ),
+            Spacer(),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Row(
+                children: [
+                  ButtonText(
+                    'C',
+                    onPress: () => this.clear(),
+                    brightness: theme.data().brightness,
+                  ),
+                  Spacer(),
+                  ButtonBackspace(
+                    brightness: theme.data().brightness,
+                    onPress: () => this.backspace(),
+                  ),
+                ],
+              ),
+            ),
+            EqualButton(
+              color: theme.data().primaryColor,
+              onPressed: () => this.calculate(),
+            ),
+          ],
+        ),
+      ),
+    ];
+
+    return theme.isLtr() ? widgets : widgets.reversed.toList();
   }
 
   void pushToHistory(String sign) {

@@ -20,6 +20,6 @@ samples, guidance on mobile development, and a full API reference.
 [*] Add dark mode  
 [*] Change status bar color to primary color  
 [*] Change navigator bar color to primary color  
-[ ] Toggle rtl and ltr view  
+[*] Toggle rtl and ltr view  
 [ ] Customable primary color  
 [*] Vibration for better UX  

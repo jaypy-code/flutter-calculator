@@ -17,8 +17,15 @@ class _HeaderState extends State<Header> {
         width: double.infinity,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment:
+              theme.isLtr() ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
+            ButtonIcon(
+              icon: Icons.swap_horiz,
+              size: 46,
+              onPress: () => theme.changePosition(),
+              brightness: theme.data().brightness,
+            ),
             ButtonIcon(
               icon: theme.data().primaryColor == Colors.blueGrey[800]
                   ? Icons.wb_sunny

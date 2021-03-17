@@ -4,11 +4,13 @@ class View extends StatelessWidget {
   final Widget child;
   final double margin;
   final Color color;
+  final bool ltr;
 
   View({
     this.child,
     this.margin = 25,
     this.color,
+    this.ltr = true,
   });
 
   @override
@@ -19,10 +21,15 @@ class View extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: this.margin),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          bottomLeft: Radius.circular(10),
-        ),
+        borderRadius: ltr
+            ? BorderRadius.only(
+                topLeft: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+              )
+            : BorderRadius.only(
+                topRight: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
         boxShadow: [
           BoxShadow(
             color: Colors.black38,
