@@ -72,10 +72,10 @@ class _MainViewState extends State<MainView> {
                         ),
                         Spacer(),
                         Button(
-                          child: Icon(
-                            Icons.backspace_outlined,
-                            color: Colors.grey[800],
-                            size: 18,
+                          child: Image.asset(
+                            'lib/assets/icons/backspace.png',
+                            width: 18,
+                            height: 18,
                           ),
                           size: 50,
                           onPress: () => this.backspace(),
