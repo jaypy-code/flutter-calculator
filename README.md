@@ -23,3 +23,4 @@ samples, guidance on mobile development, and a full API reference.
 [*] Toggle rtl and ltr view  
 [ ] Customable primary color  
 [*] Vibration for better UX  
+[ ] More responsive
