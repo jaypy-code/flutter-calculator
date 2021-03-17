@@ -1,14 +1,12 @@
-import 'package:calc/components/button.dart';
+import 'package:calc/components/buttons/text.dart';
 import 'package:flutter/material.dart';
 
 class Buttons extends StatelessWidget {
-  final List<Button> children;
-  final double height;
+  final List<ButtonText> children;
   final int count;
 
   Buttons({
     this.children,
-    this.height,
     this.count,
   });
 
@@ -17,7 +15,7 @@ class Buttons extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(20),
       width: MediaQuery.of(context).size.width - (75 + 40),
-      height: height,
+      height: 140,
       child: NotificationListener<OverscrollIndicatorNotification>(
         // ignore: missing_return
         onNotification: (overscroll) {

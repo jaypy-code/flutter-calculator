@@ -1,5 +1,6 @@
-import 'package:calc/components/button.dart';
 import 'package:calc/components/buttons.dart';
+import 'package:calc/components/buttons/backspace.dart';
+import 'package:calc/components/buttons/text.dart';
 import 'package:calc/components/equal.dart';
 import 'package:calc/components/numbers.dart';
 import 'package:calc/components/pad.dart';
@@ -35,18 +36,11 @@ class _MainViewState extends State<MainView> {
                     histories: histories,
                   ),
                   Buttons(
-                    height: 70,
                     count: 4,
                     children: buttons
                         .map(
-                          (button) => Button(
-                            child: Text(
-                              button,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.grey[800],
-                              ),
-                            ),
+                          (button) => ButtonText(
+                            button,
                             onPress: () => this.pushToHistory(button),
                           ),
                         )
@@ -59,25 +53,12 @@ class _MainViewState extends State<MainView> {
                     ),
                     child: Row(
                       children: [
-                        Button(
-                          child: Text(
-                            'c',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[800],
-                            ),
-                          ),
-                          size: 50,
+                        ButtonText(
+                          'C',
                           onPress: () => this.clear(),
                         ),
                         Spacer(),
-                        Button(
-                          child: Image.asset(
-                            'lib/assets/icons/backspace.png',
-                            width: 18,
-                            height: 18,
-                          ),
-                          size: 50,
+                        ButtonBackspace(
                           onPress: () => this.backspace(),
                         ),
                       ],
