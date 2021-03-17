@@ -9,6 +9,7 @@ import 'package:calc/database/buttons.dart';
 import 'package:calc/interface/history.dart';
 import 'package:calc/services/vibration.dart' as vibration;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -21,6 +22,12 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Theme.of(context).primaryColor,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarColor: Theme.of(context).primaryColor,
+      statusBarBrightness: Brightness.light,
+    ));
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
