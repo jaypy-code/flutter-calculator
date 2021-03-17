@@ -21,4 +21,5 @@ samples, guidance on mobile development, and a full API reference.
 [ ] Change status bar color to primary color  
 [ ] Change navigator bar color to primary color  
 [ ] Toggle rtl and ltr view  
-[ ] Customable primary color
+[ ] Customable primary color  
+[ ] Vibration for better UX
