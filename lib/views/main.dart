@@ -7,6 +7,7 @@ import 'package:calc/components/pad.dart';
 import 'package:calc/components/view.dart';
 import 'package:calc/database/buttons.dart';
 import 'package:calc/interface/history.dart';
+import 'package:calc/services/vibration.dart' as vibration;
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
@@ -77,7 +78,11 @@ class _MainViewState extends State<MainView> {
   }
 
   void pushToHistory(String sign) {
-    if (this.entry.isEmpty) return;
+    if (this.entry.isEmpty) {
+      vibration.onErrorHappend();
+      return;
+    }
+    vibration.onPressAButton();
     setState(() {
       this.histories.add(
             History(
@@ -90,12 +95,14 @@ class _MainViewState extends State<MainView> {
   }
 
   void pushToEntry(String value) {
+    vibration.onPressAButton();
     setState(() {
       this.entry += value;
     });
   }
 
   void clear() {
+    vibration.onPressAButton();
     setState(() {
       this.entry = '';
       this.histories = [];
@@ -103,6 +110,7 @@ class _MainViewState extends State<MainView> {
   }
 
   void backspace() {
+    vibration.onPressAButton();
     setState(() {
       if (this.entry != null && this.entry.length > 0)
         this.entry = this.entry.substring(0, this.entry.length - 1);
@@ -115,7 +123,13 @@ class _MainViewState extends State<MainView> {
   }
 
   void calculate() {
-    if (histories.isEmpty) return;
+    if (histories.isEmpty ||
+        (histories.length == 1 && entry.length == 0) ||
+        histories.last.sing == '=') {
+      vibration.onErrorHappend();
+      return;
+    }
+    vibration.onPressAButton();
     bool isDouble = histories[0].value.contains('.');
     double result = double.parse(histories[0].value);
 

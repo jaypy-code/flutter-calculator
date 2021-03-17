@@ -22,5 +22,5 @@ samples, guidance on mobile development, and a full API reference.
 [ ] Change navigator bar color to primary color  
 [ ] Toggle rtl and ltr view  
 [ ] Customable primary color  
-[ ] Vibration for better UX  
+[*] Vibration for better UX  
 [*] Remove all icons
