@@ -17,10 +17,10 @@ samples, guidance on mobile development, and a full API reference.
 
 
 # TODO
-[*] Add dark mode  
-[*] Change status bar color to primary color  
-[*] Change navigator bar color to primary color  
-[*] Toggle rtl and ltr view  
+[0] Add dark mode  
+[0] Change status bar color to primary color  
+[0] Change navigator bar color to primary color  
+[0] Toggle rtl and ltr view  
 [ ] Customable primary color  
-[*] Vibration for better UX  
+[0] Vibration for better UX  
 [ ] More responsive
