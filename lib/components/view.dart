@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class View extends StatelessWidget {
   final Widget child;
   final double margin;
+  final Color color;
 
   View({
     this.child,
     this.margin = 25,
+    this.color,
   });
 
   @override
@@ -16,7 +18,7 @@ class View extends StatelessWidget {
       height: MediaQuery.of(context).size.height - (this.margin * 2),
       margin: EdgeInsets.symmetric(vertical: this.margin),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
           bottomLeft: Radius.circular(10),

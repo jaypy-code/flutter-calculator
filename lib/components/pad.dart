@@ -4,16 +4,18 @@ import 'package:calc/interface/history.dart';
 class Pad extends StatelessWidget {
   final String entry;
   final List<History> histories;
+  final Brightness brightness;
 
   Pad({
     this.entry,
     this.histories,
+    this.brightness,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: (MediaQuery.of(context).size.height / 2.5) + 35,
+      height: (MediaQuery.of(context).size.height / 2.5) - 1,
       child: ListView(
         reverse: true,
         children: [
@@ -28,6 +30,7 @@ class Pad extends StatelessWidget {
               fontSize: 28,
               width: MediaQuery.of(context).size.width - (75 + 20),
             ),
+            color: brightness == Brightness.light ? Colors.white : Colors.black,
           ),
           Column(
             children: histories
@@ -39,7 +42,9 @@ class Pad extends StatelessWidget {
                       fontSize: 24,
                       width: MediaQuery.of(context).size.width - (75 + 85),
                     ),
-                    color: Colors.grey[700],
+                    color: brightness == Brightness.light
+                        ? Colors.white54
+                        : Colors.grey[700],
                   ),
                 )
                 .toList(),
@@ -52,7 +57,7 @@ class Pad extends StatelessWidget {
   Widget row(
     History history, {
     double fontSize = 28,
-    Color color = Colors.black,
+    Color color,
   }) {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 10, 0, 0),

@@ -2,14 +2,16 @@ import 'package:calc/components/buttons.dart';
 import 'package:calc/components/buttons/backspace.dart';
 import 'package:calc/components/buttons/text.dart';
 import 'package:calc/components/equal.dart';
+import 'package:calc/components/header.dart';
 import 'package:calc/components/numbers.dart';
 import 'package:calc/components/pad.dart';
 import 'package:calc/components/view.dart';
 import 'package:calc/database/buttons.dart';
 import 'package:calc/interface/history.dart';
+import 'package:calc/services/theme.dart';
 import 'package:calc/services/vibration.dart' as vibration;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -22,63 +24,66 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Theme.of(context).primaryColor,
-      systemNavigationBarIconBrightness: Brightness.light,
-      statusBarColor: Theme.of(context).primaryColor,
-      statusBarBrightness: Brightness.light,
-    ));
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: SafeArea(
-        child: Row(
-          children: [
-            NumbersColumn(
-              onPressed: (String value) => this.pushToEntry(value),
-            ),
-            View(
-              child: Column(
-                children: [
-                  Pad(
-                    entry: entry,
-                    histories: histories,
-                  ),
-                  Buttons(
-                    count: 4,
-                    children: buttons
-                        .map(
-                          (button) => ButtonText(
-                            button,
-                            onPress: () => this.pushToHistory(button),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  Spacer(),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: Row(
-                      children: [
-                        ButtonText(
-                          'C',
-                          onPress: () => this.clear(),
-                        ),
-                        Spacer(),
-                        ButtonBackspace(
-                          onPress: () => this.backspace(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  EqualButton(
-                    onPressed: () => this.calculate(),
-                  ),
-                ],
+    return Consumer<ThemeProvider>(
+      builder: (context, theme, _) => Scaffold(
+        backgroundColor: theme.data().primaryColor,
+        body: SafeArea(
+          child: Row(
+            children: [
+              NumbersColumn(
+                onPressed: (String value) => this.pushToEntry(value),
               ),
-            ),
-          ],
+              View(
+                color: theme.data().backgroundColor,
+                child: Column(
+                  children: [
+                    Header(),
+                    Pad(
+                      entry: entry,
+                      histories: histories,
+                      brightness: theme.data().brightness,
+                    ),
+                    Buttons(
+                      count: 4,
+                      children: buttons
+                          .map(
+                            (button) => ButtonText(
+                              button,
+                              onPress: () => this.pushToHistory(button),
+                              brightness: theme.data().brightness,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                    Spacer(),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          ButtonText(
+                            'C',
+                            onPress: () => this.clear(),
+                            brightness: theme.data().brightness,
+                          ),
+                          Spacer(),
+                          ButtonBackspace(
+                            brightness: theme.data().brightness,
+                            onPress: () => this.backspace(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    EqualButton(
+                      color: theme.data().primaryColor,
+                      onPressed: () => this.calculate(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

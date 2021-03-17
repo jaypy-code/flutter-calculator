@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 class EqualButton extends StatelessWidget {
   final Function onPressed;
+  final Color color;
 
-  EqualButton({this.onPressed});
+  EqualButton({
+    this.onPressed,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class EqualButton extends StatelessWidget {
         ],
       ),
       child: Material(
-        color: Theme.of(context).primaryColor,
+        color: color,
         borderRadius: BorderRadius.all(
           Radius.circular(8),
         ),
