@@ -19,25 +19,31 @@ class _HeaderState extends State<Header> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment:
               theme.isLtr() ? MainAxisAlignment.end : MainAxisAlignment.start,
-          children: [
-            ButtonIcon(
-              icon: Icons.swap_horiz,
-              size: 46,
-              onPress: () => theme.changePosition(),
-              brightness: theme.data().brightness,
-            ),
-            ButtonIcon(
-              icon: theme.data().primaryColor == Colors.blueGrey[800]
-                  ? Icons.wb_sunny
-                  : Icons.nightlight_round,
-              size: 46,
-              onPress: () => this.changeMode(theme),
-              brightness: theme.data().brightness,
-            ),
-          ],
+          children: this.children(theme),
         ),
       ),
     );
+  }
+
+  List<Widget> children(ThemeProvider theme) {
+    List<Widget> widgets = [
+      ButtonIcon(
+        icon: Icons.swap_horiz,
+        size: 46,
+        onPress: () => theme.changePosition(),
+        brightness: theme.data().brightness,
+      ),
+      ButtonIcon(
+        icon: theme.data().primaryColor == Colors.blueGrey[800]
+            ? Icons.wb_sunny
+            : Icons.nightlight_round,
+        size: 46,
+        onPress: () => this.changeMode(theme),
+        brightness: theme.data().brightness,
+      ),
+    ];
+
+    return theme.isLtr() ? widgets : widgets.reversed.toList();
   }
 
   void changeMode(ThemeProvider themeProvider) {
